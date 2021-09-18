@@ -1,4 +1,4 @@
-# EC601Project1 - WAN
+# EC601Project1 - LoRaWAN for Wildfire Prediction and Prevention
 Exploration of low-cost LoRaWAN based wide-area distributed sensor networks for prediction and prevention of wildfires.
 
 ## Problem Statement
@@ -33,8 +33,9 @@ In terms of the available IoT technolgy used to implement the system, LoRaWAN ha
 
 **Accurate and Frequent Data:** One of the preceived drawbacks of LoRa is that it has liomited bandwith and can only transmit short packages of data (about 240 bytes), but for this use case, that isn't as much of a limiting factor as it is for other use cases since the devices would only need to transmit temperature and humidity data. Additionally, while LoRa is not effective for continuous real-time monitoring it is very effective for gathering and transmitting relatively frequent data at specified times. The amount of times each sensor transmits can be determined based on an analysis based on desired data accuracy weighed against power consumption.
 
-**Secure:** Security is an important consideration for any IoT device, especially one with 
+**Secure:** Security is an important consideration for any IoT device, especially one with serious health and safety considerations. Fortunately, the security of LoRaWAN is very robust and utilizes full end-to-end encryption, ensuring that malicious actors cannot interfere with the network.
 
+**Wide Support:** The [LoRa Alliance](https://lora-alliance.org/) is a non-profit organization dedicated to increasing the use of LoRa for IoT applications and has members including IBM, Cisco and has been deployed in over 100 countries worldwide. Additionally, the LoRa Alliance provides standards and documentation for the LoRa protocol making it possible for developers to create new applications of the technology.
 
 
 ### References
