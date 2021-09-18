@@ -39,7 +39,7 @@ In terms of the available IoT technolgy used to implement the system, LoRaWAN ha
 
 ## Conclusion
 
-Wildfires have had severe economic reprecussions and have been increasing in frequency and severatiy over the past several decades. A solution to the problem is to use a distributed sensor network to gather data and predict the likelihood of wildfires and potentially stop them from causing catastrophic damage. LoRaWAN based devices offer a cheap and effective way to provide environmental temperature and humidity data at a much more granular level than satellite data. These data can  be used with predictive models to determine where wildfire occurances are more likely, which can help local authorities and governments determine the best way to allocate the already strained wildfire fighting resources and reduce the overall costs of wildfires.
+Wildfires have had severe economic reprecussions and have been increasing in frequency and severitiy over the past several decades. A solution to the problem is to use a distributed sensor network to gather data and predict the likelihood of wildfires and potentially stop them from causing catastrophic damage. LoRaWAN based devices offer a cheap and effective way to provide environmental temperature and humidity data at a much more granular level than satellite data. These data can  be used with predictive models to determine where wildfire occurances are more likely, which can help local authorities and governments determine the best way to allocate the already strained wildfire fighting resources and reduce the overall costs of wildfires.
 
 
 ### References
