@@ -1,5 +1,5 @@
 # EC601Project1 - LoRaWAN for Wildfire Prediction and Prevention
-Exploration of low-cost LoRaWAN based wide-area distributed sensor networks for prediction and prevention of wildfires.
+Exploration of LPWA (LoRAWAN specifically) based wide-area distributed sensor networks for prediction and prevention of wildfires.
 
 ## Problem Statement
 
