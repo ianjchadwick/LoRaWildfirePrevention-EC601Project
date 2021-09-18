@@ -9,7 +9,7 @@ Some of the long reaching effects of these losses are the "hardening" of the rei
 
 Approximately 84% of wildfires in the United States are caused by human activity[(5)](https://www.pnas.org/content/114/11/2946), from a variety of disparate causes ranging from negligence, to faulty and malfunctioning equipment.[(6)](https://www.fs.usda.gov/rds/archive/Catalog/RDS-2013-0009.5) This indicates that pivoting from a reactionary rebuilding stance, to a proactive early prediction, detection and prevention stance could have a profound impact on the mitigation of extremely costly wildfire events.
 
-##Proposed Solution
+## Proposed Solution
 
 Predictive models based on forest soil moisture, temperature and previously burned areas provide 83.4% accuracy based on satellite data provides an excellent basis for the creation of a wide area sensor network to gather the data needed for an even more accurate prediction.[(7)](https://ieeexplore.ieee.org/document/7503172) My proposal is to use a similar predictive model with a LoRaWAN based system of low-cost and low-power moisture and temperature sensors distributed across high risk areas. I postulate that this would provide very precise and accurate data that can be leveraged to predict the regions that are most likely to have a wildfire incident. This information can be used by local government and fire authorities to base policy and resource allocation decisions to mitigate the overall damage of wildfires. In addition, the data gathered can alert the proper authorities of a wildfire occurance while it is still relatively small, increasing the chances of an early containment.
 
