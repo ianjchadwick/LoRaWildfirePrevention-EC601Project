@@ -21,11 +21,21 @@ In order for this porposal to be feasible, there are several requirements that w
 1. Low-Cost
 2. Low-Power
 3. Cover a wide area
-4. Provide accurate data 
-5. Provide data at a relatively frequent rate
-6. Secure
+4. Provide accurate data at a relatively frequent rate
+5. Secure
+6. Wide support
 
-In terms of the available IoT technolgy used to implement the system, LoRaWAN has many properties that make it an ideal candidate based on the requirements of the system when compared to other IoT connectivity standards.[(8)](https://www.iot-now.com/2020/12/23/106701-lorawan-will-temporarily-replace-5g-networks-for-iot/) LoRa sensors and base stations are much more inexpensive with an estimated cost ranging from $0.20-$0.50/sensor and around $40.00/base station. Base stations can handle thousands of connections within a 15km range. Considering California is approximately 263,500 square kilometers, 17,563 base stations would cost $702,520 and if every square kilometer had two sensors, would require 527,000 sensors ranging from $105,400-$263,500. The total cost of hardware would be roughly $808k-964k but would cover ever square centimeter of the state. This "back of napkin calculation" is a gross oversimplification considering a large portion of the state would not require sensors because they are not at risk of wildfire (i..e deserts, lakes, areas within established cities and towns), but it provides a good conceptual 
+In terms of the available IoT technolgy used to implement the system, LoRaWAN has many properties that make it an ideal candidate based on the requirements of the system when compared to other IoT connectivity standards.[(8)](https://www.iot-now.com/2020/12/23/106701-lorawan-will-temporarily-replace-5g-networks-for-iot/) 
+
+**Low-Cost and Wide Area:** Cost is will be the primary challenge to overcome for widespread adoption of the system and the cost will increase proportionally with the area covered. Fortunately, LoRa sensors and base stations are inexpensive, with an estimated cost ranging from $0.20-$0.50/sensor and around $40.00/base station. Base stations can handle thousands of connections within a 15km range. Considering California is approximately 263,500 square kilometers, 17,563 base stations would cost $702,520 and if every square kilometer had two sensors, would require 527,000 sensors ranging from $105,400-$263,500. The total cost of hardware would be roughly $808k-966k but would cover ever square kilometer of the state. This "back of napkin calculation" is a gross oversimplification considering a large portion of the state would not require sensors because they are not at risk of wildfire (i..e deserts, lakes, areas within established cities and towns), but it provides a good conceptual framework to compare the costs of catastrophic wildfires (in the order of tens to hundreds of billions of dollars) to prevention (in the order of millions to tens of millions of dollars).
+
+**Low-Power:** LoRaWAN devices have another advantage over some of the other connectivity standards in that they can run for up to 10 years on a single battery, increasing the logevity of the sensors.
+
+**Accurate and Frequent Data:** One of the preceived drawbacks of LoRa is that it has liomited bandwith and can only transmit short packages of data (about 240 bytes), but for this use case, that isn't as much of a limiting factor as it is for other use cases since the devices would only need to transmit temperature and humidity data. Additionally, while LoRa is not effective for continuous real-time monitoring it is very effective for gathering and transmitting relatively frequent data at specified times. The amount of times each sensor transmits can be determined based on an analysis based on desired data accuracy weighed against power consumption.
+
+**Secure:** Security is an important consideration for any IoT device, especially one with 
+
+
 
 ### References
 1. [Abatzoglou, J. T. & Williams, A. P. Impact of anthropogenic climate change on wildfire across western US forests. Proc. Natl Acad. Sci. USA 113, 11770–11775 (2016).](https://www.pnas.org/content/113/42/11770)
