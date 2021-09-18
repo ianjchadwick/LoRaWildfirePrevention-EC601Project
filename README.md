@@ -15,7 +15,7 @@ Predictive models based on forest soil moisture, temperature and previously burn
 
 ### Specifications/Requirements and LoRaWAN
 
-For this proposal, I will be using Califonia as the primary basis for exploratory analysis and cost estimates, primarily because of the avialbility of data, studies and that many of the severe wildfires that have occured within the past decade in the Western United States have occured within the state.
+For this proposal, I will be using Califonia and USD as the primary basis for exploratory analysis and cost estimates, primarily because of the avialbility of data, studies and that many of the severe wildfires that have occured within the past decade in the Western United States have occured within the state.
 
 In order for this porposal to be feasible, there are several requirements that would need to be met. The system and associated devices need:
 1. Low-Cost
@@ -25,7 +25,7 @@ In order for this porposal to be feasible, there are several requirements that w
 5. Provide data at a relatively frequent rate
 6. Secure
 
-In terms of the available IoT technolgy used to implement the system, LoRaWAN has many properties that make it an ideal candidate based on the requirements of the system when compared to other IoT connectivity standards.[(8)](https://www.iot-now.com/2020/12/23/106701-lorawan-will-temporarily-replace-5g-networks-for-iot/) LoRa sensors
+In terms of the available IoT technolgy used to implement the system, LoRaWAN has many properties that make it an ideal candidate based on the requirements of the system when compared to other IoT connectivity standards.[(8)](https://www.iot-now.com/2020/12/23/106701-lorawan-will-temporarily-replace-5g-networks-for-iot/) LoRa sensors and base stations are much more inexpensive with an estimated cost ranging from $0.20-$0.50/sensor and around $40.00/base station. Base stations can handle thousands of connections within a 15km range. Considering California is approximately 263,500 square kilometers, 17,563 base stations would cost $702,520 and if every square kilometer had two sensors, would require 527,000 sensors ranging from $105,400-$263,500. The total cost of hardware would be roughly $808k-964k but would cover ever square centimeter of the state. This "back of napkin calculation" is a gross oversimplification considering a large portion of the state would not require sensors because they are not at risk of wildfire (i..e deserts, lakes, areas within established cities and towns), but it provides a good conceptual 
 
 ### References
 1. [Abatzoglou, J. T. & Williams, A. P. Impact of anthropogenic climate change on wildfire across western US forests. Proc. Natl Acad. Sci. USA 113, 11770–11775 (2016).](https://www.pnas.org/content/113/42/11770)
