@@ -8,4 +8,5 @@ Wildfire occurances have been increasing in frequency and severity over the last
 
 ### References
 [1. Abatzoglou, J. T. & Williams, A. P. Impact of anthropogenic climate change on wildfire across western US forests. Proc. Natl Acad. Sci. USA 113, 11770–11775 (2016).](https://www.pnas.org/content/113/42/11770)
+
 [2.Wang, D., Guan, D., Zhu, S. et al. Economic footprint of California wildfires in 2018. Nat Sustain 4, 252–260 (2021).](https://doi.org/10.1038/s41893-020-00646-7)
