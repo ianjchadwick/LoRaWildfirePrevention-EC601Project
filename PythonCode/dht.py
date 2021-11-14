@@ -1,3 +1,5 @@
+# AM2302 Sensor test
+
 import Adafruit_DHT
 import time
 

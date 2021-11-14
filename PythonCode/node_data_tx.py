@@ -1,4 +1,7 @@
 """
+This script runs on the LoRa nodes. It reads the temperature and humidity data from the AM2302 sensors and transmits
+the timestamped temperature and humidity data on the LoRa 915Hz band every 5 seconds.
+
 Code specific to the Adafruit RFM95W LoRa Radio Bonnet adapted from:
 Learn Guide: https://learn.adafruit.com/lora-and-lorawan-for-raspberry-pi
 Author: Brent Rubell for Adafruit Industries
