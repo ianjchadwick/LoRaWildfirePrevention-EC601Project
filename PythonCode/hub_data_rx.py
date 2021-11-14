@@ -50,7 +50,7 @@ aio = Adafruit_IO.Client(af_io_user,af_io_key)
 
 # Get ID key for ensuring that packet received was sent by one of the nodes in the network and not some data that was
 # not meant for us
-SSK = os.getenv("SUPER_SECRET_KEY")
+SSK = os.getenv("SSK")
 
 
 # Button A

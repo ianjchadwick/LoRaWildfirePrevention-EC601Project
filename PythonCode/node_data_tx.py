@@ -43,7 +43,7 @@ DHT_PIN = 4
 NODE_ID = os.getenv("NODE_ID")
 
 # Get ID key to include in packet to ensure the receiving gateway only adds data meant for our network to the cloud
-SSK = os.getenv("SUPER_SECRET_KEY")
+SSK = os.getenv("SSK")
 
 # Configure LoRa Radio
 CS = DigitalInOut(board.CE1)
