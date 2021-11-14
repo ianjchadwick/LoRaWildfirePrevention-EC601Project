@@ -22,13 +22,13 @@ import adafruit_rfm9x
 
 
 # Takes sensor data and packages it with timestamp for transmission. Packet format is a byte array
-#  with space separated values: nodeID, temp, humidity, year, month, day, hours, minutes, seconds
-def packet_encode(temperature, humidity, node_id):
+#  with space separated values: nodeID, temp, humidity, year, month, day, hours, minutes, seconds, ssk
+def packet_encode(temperature, humidity, node_id, ssk):
     timestamp = time.localtime()
     temperature = round(temperature, 2)
     humidity = round(humidity, 2)
-    pack_list = [node_id, temperature, humidity, timestamp[0], timestamp[1], timestamp[2], timestamp[3], timestamp[4], timestamp[5], timestamp[6]]
-    pack_str = ' '.join(map(str,pack_list))
+    pack_list = [node_id, temperature, humidity, timestamp[0], timestamp[1], timestamp[2], timestamp[3], timestamp[4], timestamp[5], ssk]
+    pack_str = ' '.join(map(str,pack_list)) + " "
     packet = bytes(pack_str, "utf-8")
     return packet
 
@@ -41,6 +41,9 @@ DHT_PIN = 4
 
 # Get node ID number from env
 NODE_ID = os.getenv("NODE_ID")
+
+# Get ID key to include in packet to ensure the receiving gateway only adds data meant for our network to the cloud
+SSK = os.getenv("SUPER_SECRET_KEY")
 
 # Configure LoRa Radio
 CS = DigitalInOut(board.CE1)
@@ -58,7 +61,7 @@ if __name__ == '__main__':
         # Get sensor data and put it into timestamped bytearray packet
         humidityRead, temperatureRead = Adafruit_DHT.read_retry(DHT_SENSOR, DHT_PIN)
         if humidityRead is not None and temperatureRead is not None:
-            data_packet = packet_encode(humidityRead, temperatureRead, NODE_ID)
+            data_packet = packet_encode(humidityRead, temperatureRead, NODE_ID, SSK)
         else:
             print("Failed to retrieve data from humidity sensor")
 
