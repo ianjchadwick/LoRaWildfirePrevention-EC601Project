@@ -1,4 +1,4 @@
-#LoRa Wildfire Prevention Project - EC601
+# LoRa Wildfire Prevention Project - EC601
 
 ## Goal
 Our objective is to build a proof-of-concept IoT system of low-power sensor nodes which measure temperature and humidity data, and use this data to refine the remote sensing data to imporove on existing wildfire prediction models. See the [original proposal in the wiki](https://github.com/ianjchadwick/LoRaWildfirePrevention-EC601Project/wiki/Project-Proposal) for more details.
