@@ -45,12 +45,12 @@ def packet_decode(byte_array):
 # Get userID and app key for Adafruit.io
 af_io_user = os.getenv("AF_IO_USER")
 af_io_key = os.getenv("AF_IO_KEY")
-#Create REST API client
-aio = Adafruit_IO.Client(af_io_user,af_io_key)
+# Create REST API client
+aio = Adafruit_IO.Client(af_io_user, af_io_key)
 
 # Get ID key for ensuring that packet received was sent by one of the nodes in the network and not some data that was
 # not meant for us
-SSK = os.getenv("SSK")
+SSK = int(os.getenv("SSK"))
 
 
 # Button A
@@ -89,43 +89,42 @@ rfm9x.tx_power = 23
 prev_packet = None
 
 
-if __name__ == '__main__':
+while True:
+    packet = None
+    # draw a box to clear the image
+    display.fill(0)
+    display.text('RasPi LoRa', 35, 0, 1)
 
-    while True:
-        packet = None
-        # draw a box to clear the image
-        display.fill(0)
-        display.text('RasPi LoRa', 35, 0, 1)
-
-        # check for packet rx
-        packet = rfm9x.receive()
-        if packet is None:
-            display.show()
-            display.text('- Waiting for PKT -', 15, 20, 1)
-        else:
-            try:
-                packet_received = packet_decode(packet)
-                node_id = packet_received[0]
-                temperature = packet_received[1]
-                humidity = packet_received[2]
-                ssk = packet_received[9]
-                # Create af_io feed info to send to correct node feed.
-                temperature_feed_id = aio.feeds('lora-wildfire-nodes.node-{0}-temperature'.format(node_id))
-                humidity_feed_id = aio.feeds('lora-wildfire-nodes.node-{0}-humidity'.format(node_id))
-                # If the SSKs match, then upload to Adafruit_io
-                if ssk == SSK:
-                    aio.send_data(temperature_feed_id.key, temperature)
-                    aio.send_data(humidity_feed_id.key, humidity)
-                    display.show()
-                    display.text('- Upload Complete -', 15, 20, 1)
-                else:
-                    display.show()
-                    display.text('- Not Uploaded -', 15, 20, 1)
-
-            # The reason for using the broad 'except' case is because there could be a myriad of errors if the receiver
-            # happens to pick up a transmission from another source, on the same band, meant for a different purpose.
-            except:
+    # check for packet rx
+    packet = rfm9x.receive()
+    if packet is None:
+        display.show()
+        display.text('- Waiting for PKT -', 15, 20, 1)
+    else:
+        try:
+            packet_received = packet_decode(packet)
+            node_id = packet_received[0]
+            temperature = packet_received[1]
+            humidity = packet_received[2]
+            ssk = packet_received[9]
+            # Create af_io feed info to send to correct node feed.
+            temperature_feed_id = aio.feeds('lora-wildfire-nodes.node-{0}-temperature'.format(node_id))
+            humidity_feed_id = aio.feeds('lora-wildfire-nodes.node-{0}-humidity'.format(node_id))
+            # If the SSKs match, then upload to Adafruit_io
+            if ssk == SSK:
+                aio.send_data(temperature_feed_id.key, temperature)
+                aio.send_data(humidity_feed_id.key, humidity)
                 display.show()
-                display.text('Error: Packet Invalid', 15, 20, 1)
+                display.text('- Upload Complete -', 15, 20, 1)
+            else:
+                display.show()
+                display.text('- Not Uploaded -', 15, 20, 1)
 
-        time.sleep(0.1)
+        # The reason for using the broad 'except' case is because there could be a myriad of errors if the receiver
+        # happens to pick up a transmission from another source, on the same band, meant for a different purpose.
+        except:
+            display.show()
+            display.text('Error: Packet Invalid', 15, 20, 1)
+
+    display.show()
+    time.sleep(0.1)

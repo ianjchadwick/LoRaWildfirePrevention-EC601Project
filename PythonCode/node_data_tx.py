@@ -43,7 +43,34 @@ DHT_PIN = 4
 NODE_ID = os.getenv("NODE_ID")
 
 # Get ID key to include in packet to ensure the receiving gateway only adds data meant for our network to the cloud
-SSK = os.getenv("SSK")
+SSK = int(os.getenv("SSK"))
+
+# Button A
+btnA = DigitalInOut(board.D5)
+btnA.direction = Direction.INPUT
+btnA.pull = Pull.UP
+
+# Button B
+btnB = DigitalInOut(board.D6)
+btnB.direction = Direction.INPUT
+btnB.pull = Pull.UP
+
+# Button C
+btnC = DigitalInOut(board.D12)
+btnC.direction = Direction.INPUT
+btnC.pull = Pull.UP
+
+# Create the I2C interface.
+i2c = busio.I2C(board.SCL, board.SDA)
+
+# 128x32 OLED Display
+reset_pin = DigitalInOut(board.D4)
+display = adafruit_ssd1306.SSD1306_I2C(128, 32, i2c, reset=reset_pin)
+# Clear the display.
+display.fill(0)
+display.show()
+width = display.width
+height = display.height
 
 # Configure LoRa Radio
 CS = DigitalInOut(board.CE1)
@@ -54,18 +81,20 @@ rfm9x.tx_power = 23
 prev_packet = None
 
 
-if __name__ == '__main__':
+# Loops indefinitely transmitting a packet with temperature, humidity, node coordinates, and time every 5 seconds
+while True:
+    # Get sensor data and put it into timestamped bytearray packet
+    humidityRead, temperatureRead = Adafruit_DHT.read_retry(DHT_SENSOR, DHT_PIN)
+    if humidityRead is not None and temperatureRead is not None:
+        data_packet = packet_encode(temperatureRead, humidityRead, NODE_ID, SSK)
+        display.fill(0)
+        display.text('Sent Temp={0:0.1f}*C  Humidity={1:0.1f}%'.format(temperatureRead, humidityRead), 25, 15, 1)
+    else:
+        display.fill(0)
+        display.text('Failed to retrieve data', 25, 15, 1)
 
-    # Loops indefinitely transmitting a packet with temperature, humidity, node coordinates, and time every 5 seconds
-    while True:
-        # Get sensor data and put it into timestamped bytearray packet
-        humidityRead, temperatureRead = Adafruit_DHT.read_retry(DHT_SENSOR, DHT_PIN)
-        if humidityRead is not None and temperatureRead is not None:
-            data_packet = packet_encode(humidityRead, temperatureRead, NODE_ID, SSK)
-        else:
-            print("Failed to retrieve data from humidity sensor")
+    # Send packet
+    rfm9x.send(data_packet)
 
-        # Send packet
-        rfm9x.send(data_packet)
-
-        time.sleep(5)
+    display.show()
+    time.sleep(5)
