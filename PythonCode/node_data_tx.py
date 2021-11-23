@@ -79,22 +79,77 @@ spi = busio.SPI(board.SCK, MOSI=board.MOSI, MISO=board.MISO)
 rfm9x = adafruit_rfm9x.RFM9x(spi, CS, RESET, 915.0)
 rfm9x.tx_power = 23
 prev_packet = None
-
+state=0
 
 # Loops indefinitely transmitting a packet with temperature, humidity, node coordinates, and time every 5 seconds
+#get current time
+transmit_interval = 5
+now = time.monotonic()
 while True:
-    # Get sensor data and put it into timestamped bytearray packet
-    humidityRead, temperatureRead = Adafruit_DHT.read_retry(DHT_SENSOR, DHT_PIN)
-    if humidityRead is not None and temperatureRead is not None:
-        data_packet = packet_encode(temperatureRead, humidityRead, NODE_ID, SSK)
-        display.fill(0)
-        display.text('Sent Temp={0:0.1f}*C  Humidity={1:0.1f}%'.format(temperatureRead, humidityRead), 25, 15, 1)
+
+    if not btnA.value:
+        # Press Button A
+        # Ready state
+        state=0
+
+    elif not btnB.value:
+        # Press Button B
+        #Single transmit
+        state=1
+
+    elif not btnC.value:
+        # Press Button C
+        #Continuous transmit
+        state=2
     else:
+        state=state
+    
+    if state ==0:
+        #display Ready state
         display.fill(0)
-        display.text('Failed to retrieve data', 25, 15, 1)
+        display.text('Ready state', 10, 15, 1)
+        display.show()
+    elif state ==1:
+        #revert state back to ready state
+        state =0
+        # Get sensor data and put it into timestamped bytearray packet
+        humidityRead, temperatureRead = Adafruit_DHT.read_retry(DHT_SENSOR, DHT_PIN)
+        if humidityRead is not None and temperatureRead is not None:
+            data_packet = packet_encode(temperatureRead, humidityRead, NODE_ID, SSK)
+            display.fill(0)
+            display.text('Single Temp={0:0.1f}*C  Hum={1:0.1f}%'.format(temperatureRead, humidityRead), 10, 15, 1)
+        else:
+            display.fill(0)
+            display.text('Failed to retrieve data', 25, 15, 1)  
+        
+        # Send packet
+        rfm9x.send(data_packet)
+            
+        display.show()
+        
+        #sleep for 1 second to act as debouncing and prevent duplicate transmission
+        time.sleep(1)
+        
+    elif state ==2:
+        #Take action if the transmit interval has elapsed
+        if time.monotonic() - now > transmit_interval:
+            now = time.monotonic()
+            
+            # Get sensor data and put it into timestamped bytearray packet
+            humidityRead, temperatureRead = Adafruit_DHT.read_retry(DHT_SENSOR, DHT_PIN)
+            if humidityRead is not None and temperatureRead is not None:
+                data_packet = packet_encode(temperatureRead, humidityRead, NODE_ID, SSK)
+                display.fill(0)
+                display.text('Sent Temp={0:0.1f}*C  Humidity={1:0.1f}%'.format(temperatureRead, humidityRead), 25, 15, 1)
+            else:
+                display.fill(0)
+                display.text('Failed to retrieve data', 25, 15, 1)
 
-    # Send packet
-    rfm9x.send(data_packet)
-
-    display.show()
-    time.sleep(5)
+            # Send packet
+            rfm9x.send(data_packet)
+            
+            display.show()
+            
+            
+            
+        
