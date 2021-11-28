@@ -81,9 +81,9 @@ rfm9x.tx_power = 23
 prev_packet = None
 state=0
 
-# Loops indefinitely transmitting a packet with temperature, humidity, node coordinates, and time every 5 seconds
+# Loops indefinitely transmitting a packet with temperature, humidity, node coordinates, and time every 30 minutes
 #get current time
-transmit_interval = 5
+transmit_interval = 1800
 now = time.monotonic()
 while True:
 
@@ -131,6 +131,9 @@ while True:
         time.sleep(1)
         
     elif state ==2:
+        display.fill(0)
+        display.text('Continuous state', 10, 15, 1)
+        display.show()
         #Take action if the transmit interval has elapsed
         if time.monotonic() - now > transmit_interval:
             now = time.monotonic()
