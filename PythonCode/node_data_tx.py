@@ -131,6 +131,9 @@ while True:
         time.sleep(1)
         
     elif state ==2:
+        display.fill(0)
+        display.text('Continuous state', 10, 15, 1)
+        display.show()
         #Take action if the transmit interval has elapsed
         if time.monotonic() - now > transmit_interval:
             now = time.monotonic()
