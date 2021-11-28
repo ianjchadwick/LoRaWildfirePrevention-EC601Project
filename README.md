@@ -14,5 +14,5 @@ Our objective is to build a proof-of-concept IoT system of low-power, low-cost s
 The wiki page has more detailed information about specfic pages for the:
 * [Project Proposal](https://github.com/ianjchadwick/LoRaWildfirePrevention-EC601Project/wiki/Project-Proposal)
 * [Hardware List](https://github.com/ianjchadwick/LoRaWildfirePrevention-EC601Project/wiki/Hardware)
-* [Research and Guides](https://github.com/ianjchadwick/LoRaWildfirePrevention-EC601Project/wiki/Research-and-Guides)
+* [Research and Resources](https://github.com/ianjchadwick/LoRaWildfirePrevention-EC601Project/wiki/Research-and-Resources)
 * [APIs, Packages and Libraries](https://github.com/ianjchadwick/LoRaWildfirePrevention-EC601Project/wiki/APIs,-Packages-and-Libraries)
