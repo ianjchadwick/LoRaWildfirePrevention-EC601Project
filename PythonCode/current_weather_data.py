@@ -28,5 +28,5 @@ if __name__ == '__main__':
     # If we need, I could expand my code in order to get through data by those options.
     lat = 42.350097
     lon = -71.156442
-    tempKey = "024c5bef5ca14affb1dd732c15a1a2f4"
+    tempKey = "insert API key"
     data = weather_data_request(lat, lon, tempKey)
