@@ -43,9 +43,9 @@ if __name__ == '__main__':
     #   Second： UserName of the adafruit gateway
     #   Third: Current Feed-Key for adafruit gateway
     # Etc:
-    #   X_AIO_Key = "aio_bspQ29zZjgMMQgEhUKISmDWA9IgF"
-    #   user_name = "IanJChadwick"
-    #   feed_key = "lora-wildfire-nodes"
+    #   X_AIO_Key = "key"
+    #   user_name = "UserName"
+    #   feed_key = "feed key"
 
     test = DataTransmission(X_AIO_Key, user_name, feed_key)
     test.dealwith_data()
