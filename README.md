@@ -61,12 +61,23 @@ A high level overview of our methodology is described in the series of steps bel
 > * The calculation also requires the FFMC, DMC and DC from the previous day.
 6. The data is then displayed on the AF.io Dashboard
 
+### Wildfire Prediction Metrics and Calculations
+* We determined that of the metrics that were described in the paper [(Impact of Anthropogenic Climate Change on Wildfire Across Western Forests)](https://www.pnas.org/content/113/42/11770), we would calculate the FWI (and the associated FFMC, DMC, and DC) in addition to the raw temperature and relative humidity readings from the sensor nodes.
+* The other metrics, while useful in deterimining potential wildfire risk, were either too slow to take advantage of the hourly data being gathered, (i.e. on monthly timescales etc.) or did not utilize the temperature and humidity data that was being gathered in their calculations.
 
 ### Node Data Transmission
+* Upon running the [node_data_tx.py](https://github.com/ianjchadwick/LoRaWildfirePrevention-EC601Project/blob/main/PythonCode/node_data_tx.py) file, the nodes becomes a finite state machine with 3 states.
+>1. The first state is the default "Ready" state and is indicated by "Ready" on the OLED display. This state is toggled by the left most button on the node.
+>2. The second state is a single transmission state that sends the current sensor reading and returns to the Ready state. It is toggled by the middle button on the node.
+>3. The third state is a continuous transmission state where the node will keep track of a monotonically increasing clock and transmit the current sensor reading every hour. It is toggled by the right most button on the node.
+* The transmission is a bytearray with the NODE_ID and the SSK packaged with the temperature and relative humidity data from the AM2303 sensor.
 
-### Wildfire Prediction Metrics and Calculations
-* We determined that of the metrics that were described in the paper [(Impact of Anthropogenic Climate Change on Wildfire Across Western Forests)](https://www.pnas.org/content/113/42/11770), in addition to the raw temperature and relative humidity readings from the sensor nodes, we would have the nodes calculate location specific
-
+### Data Receieved by Gateway
+* Upon running the [hub_data_rx.py](https://github.com/ianjchadwick/LoRaWildfirePrevention-EC601Project/blob/main/PythonCode/hub_data_rx.py) file, the gateway listens for a packet from a sensor node that has a matching SSK
+* It decodes the packet and calculates the Vapor Pressure Deficit (VPD), and adds all three values to the correct feed associated with that node's ID.
+* It then uploads the data to AF.io which displays the values from each of the nodes' feeds on the dashboard.
+* Once daily, at noon the gateway retrieves the latest values from AF.io for Temperature, Humidity, the previous day's Fine Fuel Moisture Code (FFMC), Duff Moisture Code (DMC) and Drought Code (DC), as well as querries the weatherbit.io API for 24-hour precipitation total, and the average wind speed in order to calculate the current day's FFMC, DMC and DC, and use these values along with the temperature, humidty, and month, to calculate the day's Fire Weather Index (FWI).
+* It then uploads all this to AF.io where it is also displayed on the dashboard.
 
 
 ## [Wiki](https://github.com/ianjchadwick/LoRaWildfirePrevention-EC601Project/wiki) 
