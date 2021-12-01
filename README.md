@@ -8,7 +8,7 @@ Our objective is to build a proof-of-concept IoT system of low-power, low-cost s
 
 ## Hardware and Software Set-Up
 ### Sensor Node Hardware
-We utilized RaspberryPi Zero based sensor nodes with a LoRa radio transciever hat and an AM2302 sensor to record temperature and relative humidity data, and transmit it via LoRa on the ISM 915MHz band to a central gateway every 60 minutes.
+We utilized RaspberryPi Zero based sensor nodes with a LoRa radio transciever module and an AM2302 sensor to record temperature and relative humidity data, and transmit it via LoRa on the ISM 915MHz band to a central gateway every 60 minutes.
 * We used a [RaspberryPI Zero](https://www.adafruit.com/product/3708) with headers installed as the base for the other breakouts.
 * A [LoRa radio transceiver module](https://www.adafruit.com/product/4074) was added to the Pi via the headers.
 * An [AM2302 temperature and humidity sensor](https://www.adafruit.com/product/393) was soldered to GPIO pin 4, the 5V, and GND on the LoRa tansceiver module.
