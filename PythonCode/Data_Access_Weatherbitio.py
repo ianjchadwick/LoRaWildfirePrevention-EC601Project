@@ -5,7 +5,7 @@ import grab_from_Adafruit
 
 # Enter the API key of Weatherbitio at here:
 
-API_key = '476a2c1d68b847a0988d42e9eeab46c3'
+API_key = ''
 
 class Weatherbitio:
 
