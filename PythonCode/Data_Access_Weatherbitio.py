@@ -102,7 +102,7 @@ class Weatherbitio:
 if __name__ == '__main__':
     # Access the 12000 meteorological stations data by specify the "START" and the "END" of day with an accurate GPS, City or PostCode,
     # Note: If you want to access the most recently data (Subhourly and Hourly mode only);
-    #       Define the interval between most current until the next available day of the current:
+    #       Define the interval between most current to the next available day of the current:
     #       Example: Most Current time: 12/01/2021, You should specify the interval start with: 12/01/2021, end with: 12/02/2021
     test = Weatherbitio('ByGPS', '42.350097', '-71.156442', '2021-12-01', '2021-12-02', 'subhourly')
     wind = test.get_wind_data()
