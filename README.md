@@ -3,7 +3,7 @@
 ## Goal
 Our objective is to build a proof-of-concept IoT system of low-power, low-cost sensor nodes which measure temperature and relative humidity data, and use this data to refine remote sensing data in order to improve the accuracy of existing wildfire prediction models. Our hope is that more data will allow decision makers and stakeholders, such as firefighting organizations and local government officials to allocate resources more efficiently, in hopes of preventing catastrophic wildfire losses. See the [original proposal in the wiki](https://github.com/ianjchadwick/LoRaWildfirePrevention-EC601Project/wiki/Project-Proposal) for more details.
 
-### Project Management
+### Project Management Methods
 * The project was implemented using the AGILE framework (see the [project page](https://github.com/ianjchadwick/LoRaWildfirePrevention-EC601Project/projects/1) for kanban board) over the course of five two-week sprints.
 
 ## Hardware and Software Set-Up
