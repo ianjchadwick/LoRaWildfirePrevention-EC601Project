@@ -2,9 +2,9 @@
 import requests
 import json
 
-X_AIO_Key = "aio_Qevb79p7bJa6FgJl4vUUv85esNlN"
-feed_key = "lora-wildfire-nodes"
-user_name = "IanJChadwick"
+X_AIO_Key = ""
+feed_key = ""
+user_name = ""
 
 class DataTransmission:
 
