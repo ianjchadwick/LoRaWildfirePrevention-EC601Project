@@ -76,8 +76,11 @@ A high level overview of our methodology is described in the series of steps bel
 * Upon running the [hub_data_rx.py](https://github.com/ianjchadwick/LoRaWildfirePrevention-EC601Project/blob/main/PythonCode/hub_data_rx.py) file, the gateway listens for a packet from a sensor node that has a matching SSK
 * It decodes the packet and calculates the Vapor Pressure Deficit (VPD), and adds all three values to the correct feed associated with that node's ID.
 * It then uploads the data to AF.io which displays the values from each of the nodes' feeds on the dashboard.
-* Once daily, at noon the gateway retrieves the latest values from AF.io for Temperature, Humidity, the previous day's Fine Fuel Moisture Code (FFMC), Duff Moisture Code (DMC) and Drought Code (DC), as well as querries the weatherbit.io API for 24-hour precipitation total, and the average wind speed in order to calculate the current day's FFMC, DMC and DC, and use these values along with the temperature, humidty, and month, to calculate the day's Fire Weather Index (FWI).
-* It then uploads all this to AF.io where it is also displayed on the dashboard.
+* Once daily, at noon the gateway retrieves the latest values from AF.io for Temperature, Humidity, the previous day's Fine Fuel Moisture Code (FFMC), Duff Moisture Code (DMC) and Drought Code (DC), as well as querries the weatherbit.io API for 24-hour precipitation total, and the average wind speed.
+* It then utilizes the functions in [fire_weather_index.py](https://github.com/ianjchadwick/LoRaWildfirePrevention-EC601Project/blob/main/PythonCode/fire_weather_index.py)in order to calculate the current day's FFMC, DMC and DC, and use these values along with the temperature, humidty, and month, to calculate the day's Fire Weather Index (FWI). (See the figure below for a graphical representation).
+![Fire Weather Index Calculation Scheme](https://github.com/ianjchadwick/LoRaWildfirePrevention-EC601Project/blob/main/Images/FWI%20Structure.JPG?raw=true "Structure of the CFWI System")
+* It performs this caclulation for every node and associates the calculated values to the correct feed determined by the node ID.
+* It then uploads all the newly calculated FWI data and associated components to AF.io where it is also displayed on the dashboard.
 
 
 ## [Wiki](https://github.com/ianjchadwick/LoRaWildfirePrevention-EC601Project/wiki) 
