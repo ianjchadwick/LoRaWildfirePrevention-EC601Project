@@ -83,7 +83,7 @@ state=0
 
 # Loops indefinitely transmitting a packet with temperature, humidity, node coordinates, and time every 30 minutes
 #get current time
-transmit_interval = 1800
+transmit_interval = 3600
 now = time.monotonic()
 while True:
 
