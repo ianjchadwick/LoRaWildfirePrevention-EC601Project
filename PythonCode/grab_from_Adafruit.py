@@ -2,7 +2,7 @@
 import requests
 import json
 
-X_AIO_Key = "aio_bspQ29zZjgMMQgEhUKISmDWA9IgF"
+X_AIO_Key = "aio_Qevb79p7bJa6FgJl4vUUv85esNlN"
 feed_key = "lora-wildfire-nodes"
 user_name = "IanJChadwick"
 
@@ -32,7 +32,7 @@ class DataTransmission:
         latest_value = {}
         for data in sensorData:
             latest_value[data['name']] = [data['last_value'], data['created_at']]
-            print(latest_value[data['name']])
+            print(f"Latest {data['name']}'s value: {latest_value[data['name']][0]}, at {latest_value[data['name']][1]}")
 
         return latest_value
 
