@@ -6,7 +6,7 @@ import grab_from_Adafruit
 
 # Enter the API key of Weatherbitio at here:
 
-API_key = ''
+API_key = '476a2c1d68b847a0988d42e9eeab46c3'
 
 class Weatherbitio:
 
@@ -16,6 +16,7 @@ class Weatherbitio:
             Option:  By GPS
             Four Patterns:  Historical:     Daily, Hourly, Subhourly; 
                             Current:        Minutely
+
             Same way to access for different kinds of species based on the API support
             Documentation for sub-hourly(15 minutes period): https://www.weatherbit.io/api/weather-history-daily
         """ 
@@ -95,8 +96,6 @@ class Weatherbitio:
 
             return data_current_list
 
-            # return data_minutely
-
 
     def get_historical_data(self) -> dict:
         data_weatherbit = self.access_data()
@@ -126,12 +125,14 @@ class Weatherbitio:
                 wind_sum = historical_data[key][1] + wind_sum
 
             avg_windspeed = float(wind_sum / len(historical_data))
-            avg_prepitation = float(precipitation_sum / len(historical_data))
+            avg_precipitation = float(precipitation_sum / len(historical_data))
 
-            return [avg_prepitation, avg_windspeed]
+            return [precipitation_sum, avg_precipitation, avg_windspeed]
 
         else:
             return None
+
+
 """
 
 Access the 12000 meteorological stations data by specify the "START" and the "END" of day with an accurate GPS, City or PostCode.
@@ -140,21 +141,32 @@ Note: If you want to access the most recently data (Subhourly and Hourly mode on
     Define the interval between most current to the next available day of the current:
     Example: Most Current time: 12/01/2021, You should specify the interval start with: 12/01/2021, 
     end with: 12/02/2021
+
+Main Function: Test Only
+
 """
 
-# Test Main Function:
-if __name__ == '__main__':
-    
-    test = Weatherbitio('By History', '42.350097', '-71.156442', '2021-12-03', '2021-12-04', 'hourly')
-    hist = test.get_historical_data()
-    average = test.get_average()
-    # Test access the data subhourly by the time_stamp:
-    for key in hist:
-        print(f"Precipitation: {hist[key][0]}, Wind_Speed: {hist[key][1]}, Direction: {hist[key][2]}, at time: {key}, ")
-    print(f"Average precipitation: {average[0]}, wind speed: {average[1]}")
-    # test2 = Weatherbitio('By Current', '42.350097', '-71.156442')
-    # data = test2.access_data()
-    # print(f"Last Observation Wind speed: {data[0]}, Time: {data[1]}, Zone: {data[2]}")
+# if __name__ == '__main__':
+
+#     """
+#         Test: By Historical
+#     """
+#     test = Weatherbitio('By History', '42.350097', '-71.156442', '2021-12-03', '2021-12-04', 'hourly')
+#     hist = test.get_historical_data()
+#     average = test.get_average()
+#     # Test access the data subhourly by the time_stamp:
+#     for key in hist:
+#         print(f"Precipitation: {hist[key][0]}, Wind_Speed: {hist[key][1]}, Direction: {hist[key][2]}, at time: {key}, ")
+
+#     print(f"\nTotal precipitation: {average[0]}, Average precipitation: {average[1]}, Average wind speed: {average[2]}")
+
+#     """
+#         Test: By Current
+#     """
+
+#     test2 = Weatherbitio('By Current', '42.350097', '-71.156442')
+#     data = test2.access_data()
+#     print(f"\nLast Observation Wind speed: {data[0]}, Time: {data[1]}, Zone: {data[2]}")
 
 
 
