@@ -38,14 +38,16 @@ class DataTransmission:
 
 # test for running:
 if __name__ == '__main__':
-    # Arguments requirement:
-    #   First: X_AIO_Key for adafruit gateway
-    #   Second： UserName of the adafruit gateway
-    #   Third: Current Feed-Key for adafruit gateway
-    # Etc:
-    #   X_AIO_Key = "key"
-    #   user_name = "UserName"
-    #   feed_key = "feed key"
+    """Arguments requirement:
+        First: X_AIO_Key for adafruit gateway
+        Second： UserName of the adafruit gateway
+        Third: Current Feed-Key for adafruit gateway
+        
+        Etc:
+            X_AIO_Key = "your Adadruit X_AIO_key"
+            user_name = "Your Adafruit USERNAME"
+            feed_key = "Your Adafruit Feeds key"
+    """
 
     test = DataTransmission(X_AIO_Key, user_name, feed_key)
     test.dealwith_data()
