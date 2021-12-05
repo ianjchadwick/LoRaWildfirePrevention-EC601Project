@@ -16,7 +16,6 @@ class Weatherbitio:
             Option:  By GPS
             Four Patterns:  Historical:     Daily, Hourly, Subhourly; 
                             Current:        Minutely
-
             Same way to access for different kinds of species based on the API support
             Documentation for sub-hourly(15 minutes period): https://www.weatherbit.io/api/weather-history-daily
         """ 
@@ -134,16 +133,12 @@ class Weatherbitio:
 
 
 """
-
 Access the 12000 meteorological stations data by specify the "START" and the "END" of day with an accurate GPS, City or PostCode.
-
 Note: If you want to access the most recently data (Subhourly and Hourly mode only);  
     Define the interval between most current to the next available day of the current:
     Example: Most Current time: 12/01/2021, You should specify the interval start with: 12/01/2021, 
     end with: 12/02/2021
-
 Main Function: Test Only
-
 """
 
 # if __name__ == '__main__':
@@ -167,6 +162,4 @@ Main Function: Test Only
 #     test2 = Weatherbitio('By Current', '42.350097', '-71.156442')
 #     data = test2.access_data()
 #     print(f"\nLast Observation Wind speed: {data[0]}, Time: {data[1]}, Zone: {data[2]}")
-
-
 
