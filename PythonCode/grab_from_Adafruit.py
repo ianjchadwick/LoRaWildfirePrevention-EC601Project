@@ -2,10 +2,6 @@
 import requests
 import json
 
-X_AIO_Key = ""
-feed_key = ""
-user_name = ""
-
 class DataTransmission:
 
     def __init__(self, *args):
@@ -32,22 +28,24 @@ class DataTransmission:
         latest_value = {}
         for data in sensorData:
             latest_value[data['name']] = [data['last_value'], data['created_at']]
-            print(f"Latest {data['name']}'s value: {latest_value[data['name']][0]}, at {latest_value[data['name']][1]}")
+            # print(f"Latest {data['name']}'s value: {latest_value[data['name']][0]}, at {latest_value[data['name']][1]}")
 
         return latest_value
 
-# test for running:
-if __name__ == '__main__':
-    """Arguments requirement:
-        First: X_AIO_Key for adafruit gateway
-        Second： UserName of the adafruit gateway
-        Third: Current Feed-Key for adafruit gateway
-        
-        Etc:
-            X_AIO_Key = "your Adadruit X_AIO_key"
-            user_name = "Your Adafruit USERNAME"
-            feed_key = "Your Adafruit Feeds key"
-    """
 
-    test = DataTransmission(X_AIO_Key, user_name, feed_key)
-    test.dealwith_data()
+""" Test Only: """
+
+# if __name__ == '__main__':
+#     """Arguments requirement:
+#         First: X_AIO_Key for adafruit gateway
+#         Second： UserName of the adafruit gateway
+#         Third: Current Feed-Key for adafruit gateway
+#
+#         Etc:
+#             X_AIO_Key = "your Adadruit X_AIO_key"
+#             user_name = "Your Adafruit USERNAME"
+#             feed_key = "Your Adafruit Feeds key"
+#     """
+#
+#     test = DataTransmission(X_AIO_Key, user_name, feed_key)
+#     test.dealwith_data()

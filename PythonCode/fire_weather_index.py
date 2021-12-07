@@ -98,7 +98,7 @@ def duff_moisture_code(rel_hum, temp, precip, month, DMC_prev=6.0):
 
     # Log drying rate for DMC
     if temp < -1.1:
-       temp = -1.1
+        temp = -1.1
     K = 1.894*(temp+1.1)*(100-rel_hum)*effDayLength*math.pow(10, -6)
 
     DMC = Po + 100*K
