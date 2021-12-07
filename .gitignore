@@ -3,3 +3,7 @@
 *.xml
 PythonCode/node_location.json
 PythonCode/unit_test.py
+PythonCode/sample_data2.json
+PythonCode/__pycache__/fire_weather_index.cpython-39.pyc
+PythonCode/sample_data.json
+PythonCode/__pycache__/fire_weather_index.cpython-39.pyc
