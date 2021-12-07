@@ -101,15 +101,27 @@ class Weatherbitio:
         historical_data = {}
         last_precipitation = float()
         precipitation_sum = 0.0
+        last_date = 0
         for sub_data in data_weatherbit:
             time_stamp = sub_data['timestamp_local']
+            # If timestamp is exceed the current time , no observation will found, break the loop
             if sub_data['wind_spd'] is None:
                 break
 
-            if self.pattern == 'subhourly':
-                historical_data[time_stamp] = [float(sub_data['precip_rate']), float(sub_data['wind_spd']), float(sub_data['wind_dir'])]
-            else:
-                historical_data[time_stamp] = [float(sub_data['precip']), float(sub_data['wind_spd']), float(sub_data['wind_dir'])]
+            time_Date = time_stamp.split("T")[0]
+            time_Hour = time_stamp.split("T")[1]
+            date = time_Date[7:9]
+            if date == self.startDate[7:9] and int(time_Hour[0:2]) >= 12 and int(time_Hour[0:2]) <= 23:
+                if self.pattern == 'subhourly':
+                    historical_data[time_stamp] = [float(sub_data['precip_rate']), float(sub_data['wind_spd']), float(sub_data['wind_dir'])]
+                else:
+                    historical_data[time_stamp] = [float(sub_data['precip']), float(sub_data['wind_spd']), float(sub_data['wind_dir'])]
+
+            if date != self.startDate[7:9] and int(time_Hour[0:2]) <= 11:
+                if self.pattern == 'subhourly':
+                    historical_data[time_stamp] = [float(sub_data['precip_rate']), float(sub_data['wind_spd']), float(sub_data['wind_dir'])]
+                else:
+                    historical_data[time_stamp] = [float(sub_data['precip']), float(sub_data['wind_spd']), float(sub_data['wind_dir'])]
 
         return historical_data
 
@@ -124,9 +136,8 @@ class Weatherbitio:
                 wind_sum = historical_data[key][1] + wind_sum
 
             avg_windspeed = float(wind_sum / len(historical_data))
-            avg_precipitation = float(precipitation_sum / len(historical_data))
 
-            return [precipitation_sum, avg_precipitation, avg_windspeed]
+            return [float(precipitation_sum), avg_windspeed]
 
         else:
             return None
@@ -138,27 +149,28 @@ Note: If you want to access the most recently data (Subhourly and Hourly mode on
     Define the interval between most current to the next available day of the current:
     Example: Most Current time: 12/01/2021, You should specify the interval start with: 12/01/2021, 
     end with: 12/02/2021
-Main Function: Test Only
 """
 
+""" Main Function: Test Only """
 # if __name__ == '__main__':
 
-#     """
-#         Test: By Historical
-#     """
-#     test = Weatherbitio('By History', '42.350097', '-71.156442', '2021-12-03', '2021-12-04', 'hourly')
-#     hist = test.get_historical_data()
-#     average = test.get_average()
-#     # Test access the data subhourly by the time_stamp:
-#     for key in hist:
-#         print(f"Precipitation: {hist[key][0]}, Wind_Speed: {hist[key][1]}, Direction: {hist[key][2]}, at time: {key}, ")
+    # """
+    #     Test: By Historical
+    # """
 
-#     print(f"\nTotal precipitation: {average[0]}, Average precipitation: {average[1]}, Average wind speed: {average[2]}")
+    # test = Weatherbitio('By History', '42.350097', '-71.156442', '2021-12-05', '2021-12-07', 'hourly')
+    # hist = test.get_historical_data()
+    # average = test.get_average()
+    # # Test access the data subhourly by the time_stamp:
+    # for key in hist:
+    #     print(f"Precipitation: {hist[key][0]}, Wind_Speed: {hist[key][1]}, Direction: {hist[key][2]}, at time: {key}, ")
+    #
+    # print(f"\nTotal precipitation: {average[0]}, Average wind speed: {average[1]}")
 
-#     """
-#         Test: By Current
-#     """
+    # """
+    #     Test: By Current
+    # """
 
-#     test2 = Weatherbitio('By Current', '42.350097', '-71.156442')
-#     data = test2.access_data()
-#     print(f"\nLast Observation Wind speed: {data[0]}, Time: {data[1]}, Zone: {data[2]}")
+    # test2 = Weatherbitio('By Current', '42.350097', '-71.156442')
+    # data = test2.access_data()
+    # print(f"\nLast Observation Wind speed: {data[0]}, Time: {data[1]}, Zone: {data[2]}")

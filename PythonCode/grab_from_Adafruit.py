@@ -2,10 +2,6 @@
 import requests
 import json
 
-X_AIO_Key = ""
-feed_key = ""
-user_name = ""
-
 class DataTransmission:
 
     def __init__(self, *args):
@@ -32,7 +28,7 @@ class DataTransmission:
         latest_value = {}
         for data in sensorData:
             latest_value[data['name']] = [data['last_value'], data['created_at']]
-            print(f"Latest {data['name']}'s value: {latest_value[data['name']][0]}, at {latest_value[data['name']][1]}")
+            # print(f"Latest {data['name']}'s value: {latest_value[data['name']][0]}, at {latest_value[data['name']][1]}")
 
         return latest_value
 
