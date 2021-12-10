@@ -27,7 +27,7 @@ The nodes and gateways are running the Raspbian operating system with the Circui
 * [RasbianOS](https://www.raspberrypi.com/software/) was installed on an 8GB SD card for the nodes and a 32GB SD card for the gateway.
 * CircuitPython was installed on the gateway and each of the nodes following the [outline provided here](https://learn.adafruit.com/circuitpython-on-raspberrypi-linux/installing-circuitpython-on-raspberry-pi).
 * Then the radio modules were set-up by installing the necessary modules [discussed here](https://learn.adafruit.com/lora-and-lorawan-radio-for-raspberry-pi/rfm9x-raspberry-pi-setup).
-* The DHT22 sensor module was insalled utilizing [the adafruit circuit python libraries](https://learn.adafruit.com/dht/dht-circuitpython-code)
+* The DHT22 sensor module was installed utilizing [the adafruit circuit python libraries](https://learn.adafruit.com/dht/dht-circuitpython-code)
 ### Node-specific Software Set-up
 * The nodes each have environments variable set for: 
 >* NODE_ID="unique integer" this ID identifies the node so that its location and data values can be determined by the gateway
@@ -43,7 +43,7 @@ The nodes and gateways are running the Raspbian operating system with the Circui
 
 ### API Acess: 
 #### Adafruit.io Cloud Storage and Dashboard Set-up
-An API key from [Adafruit.io](https://io.adafruit.com/)(AF.io) is required. We use AF.io as a cloud data repository, and display the gathered data on [a dashboard](https://io.adafruit.com/IanJChadwick/dashboards/lora-wildfire-project).
+An API key from [Adafruit.io](https://io.adafruit.com/)(AF.io) is required. We use AF.io as a cloud data repository, and display the gathered data on a dashboard [demo of dashboard](https://io.adafruit.com/IanJChadwick/dashboards/lora-wildfire-project).
 * An AF.io feed was created for each data point (temperature, humidity, VPD, FWI, DMC and DC) for every node in order for the gateway to be able to transmit it to AF.io when it gets a packet from the node.
 >* See the [AF.io documentation](https://io.adafruit.com/api/docs/#adafruit-io-http-api) or the [learning guide](https://learn.adafruit.com/series/adafruit-io-basics) to get instructions on how to use the AF.io platform and library.
 * Additionally, a [dashboard](https://io.adafruit.com/IanJChadwick/dashboards/lora-wildfire-project) was created to provide a way to view the data. This dashboard was made public, so that anyone can view it, but options exist to make it private if desired.
@@ -58,7 +58,7 @@ A high level overview of our methodology is described in the series of steps bel
 4. Gateway receives data from nodes, unpacks it, calculates the VPD and uploads the data to appropriate Adafruit.io feeds based on NODE_ID
 5. Once daily at noon the Fire Weather Index (FWI), and it's components, the Fine Fuel Moisture Code (FFMC), the Duff Moisture Code (DMC) and the Drought Code (DC) are calculated (as per the parameters specified for the [Fire Weather Index](https://cfs.nrcan.gc.ca/publications?id=19927)) and uploaded to AF.io
 > * This calculation requires the previous 24-hour precipitation total and the wind speed which is gathered from the hourly weatherbit.io API
-> * The calculation also requires the FFMC, DMC and DC from the previous day.
+> * The calculation also requires the FFMC, DMC and DC from the previous day. This is retrieved from AF.io by retrieving the latest values from the respective feeds. 
 6. The data is then displayed on the AF.io Dashboard
 
 ### Wildfire Prediction Metrics and Calculations
@@ -81,6 +81,26 @@ A high level overview of our methodology is described in the series of steps bel
 ![Fire Weather Index Calculation Scheme](https://github.com/ianjchadwick/LoRaWildfirePrevention-EC601Project/blob/main/Images/FWI%20Structure.JPG?raw=true "Structure of the CFWI System")
 * It performs this caclulation for every node and associates the calculated values to the correct feed determined by the node ID.
 * It then uploads all the newly calculated FWI data and associated components to AF.io where it is also displayed on the dashboard.
+
+## Results and Further Directions:
+### Results
+#### Hardware -Developed:
+* Three battery powered Sensor Nodes
+> * Raspberry Pi Zero, LoRa transceiver module and AM2302 sensor module
+* LoRa Gateway
+> * Raspberry Pi 3B+ and LoRa transceiver module
+#### Software –Developed Python Code:
+* For LoRa-based data transmission protocol
+* To retrieve weather station data from weatherbit.io API
+* Calculate wildfire prediction indices and metrics
+* Automated uploads of data and metrics to cloud database (AF.io)
+### Future Directions
+* Deploy nodes to rural, wildfire prone areas to refine parameters of the system.
+* Create real-time visualizations of data based on GPS coordinates on map for stakeholders
+* Compare against remote sensing data to refine the accuracy of prediction models.
+> * As of the time of writing there were not any remote sensing data sources avaiable that did not utilize some kind of downscaling algorithm to take the raw data from the relatively low spatial resolution remote sensor to a finer and higher resolution ([like this for example](https://ieeexplore.ieee.org/document/6838955)). An area for potential exploration is whether this low-spatial resolution data can be complemented by sensor nodes to create a more accurate representation of the true state of the environemnt and take some of the estimation that is introduced by the downscaling out the equation. 
+* Expand data gathering capabilities of the nodes by adding other sensors to eliminate need for wind and precipiation data from weather stations.
+> * We think it might be worth exploring the idea of creating a new metric that takes advantage of some of the real-time information being gathered by the nodes. The Fire Weather Index is an excellent metric, but it was developed in 1987 when there were limited ways to gather data in real time. Perhaps with some further research and data gathered a more accurate index could be created that takes advantage of the real-time data gathering capabilities available to us now.
 
 
 ## [Wiki](https://github.com/ianjchadwick/LoRaWildfirePrevention-EC601Project/wiki) 
